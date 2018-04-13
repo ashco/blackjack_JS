@@ -1,0 +1,82 @@
+@import "helper/placeholders";
+@import "helper/mixins";
+@import "helper/variables";
+@import "layout/grid";
+@import "layout/default";
+
+//Board
+.container {
+  background: $color-board;
+}
+
+nav {
+  background: $color-nav;
+}
+
+.text__container {
+  text-align: center;
+
+  h1 {
+    font-size: 4rem;
+  }
+}
+
+//Cards
+.card {
+  width: 8rem;
+  height: 12rem;
+  margin: 0.5rem;
+  background: white;
+}
+
+.card__container--dealer {
+  // margin-top: 5rem;
+}
+
+//Chips
+.chip {
+  width: 10rem;
+  height: 10rem;
+  margin: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 3rem;
+  color: white;
+}
+
+.chip__container--player {
+
+}
+
+.chip__container--dealer {
+
+}
+
+//Buttons
+.button__container{
+
+
+
+  button {
+    background-color: $color-nav;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: .2rem;
+  }
+}
+
+
+
+//Mobile
+@media(max-width: 600px){
+
+
+  .chip {
+    width: 20vw;
+    height: 20vw;
+  }
+}
