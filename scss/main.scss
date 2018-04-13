@@ -11,6 +11,12 @@
 
 nav {
   background: $color-nav;
+
+  h2 {
+    text-align: center;
+    color: $color-white;
+    font-size: 2.4rem;
+  }
 }
 
 .text__container {
@@ -23,10 +29,11 @@ nav {
 
 //Cards
 .card {
-  width: 8rem;
-  height: 12rem;
+  width: 10rem;
+  height: 15rem;
   margin: 0.5rem;
-  background: white;
+  background: $color-white;
+  border-radius: 0.8rem;
 }
 
 .card__container--dealer {
@@ -40,7 +47,7 @@ nav {
   margin: 1rem;
   background: rgba(0, 0, 0, 0.3);
   font-size: 3rem;
-  color: white;
+  color: $color-white;
 }
 
 .chip__container--player {
@@ -59,12 +66,13 @@ nav {
   button {
     background-color: $color-nav;
     border: none;
-    color: white;
-    padding: 15px 32px;
+    width: 120px;
+    color: $color-white;
+    padding: 1.5rem 3rem;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1.6rem;
     border-radius: .2rem;
   }
 }
@@ -73,10 +81,24 @@ nav {
 
 //Mobile
 @media(max-width: 600px){
+  //Cards
+  .card {
+    width: 8rem;
+    height: 12rem;
+  }
 
-
+  //Chips
   .chip {
     width: 20vw;
     height: 20vw;
+  }
+
+  //Buttons
+  .button__container {
+
+    button {
+      padding: 1rem 2rem;
+      width: 100px;
+    }
   }
 }

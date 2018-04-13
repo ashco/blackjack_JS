@@ -6,7 +6,7 @@
 .container {
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-columns: 20% 1fr 1fr 20%;
   grid-template-rows: 80px 1fr 3fr 1fr 1fr;
   grid-template-areas: "nav          nav             nav             nav" ".            text__container text__container ." "chips-board  cards-player    cards-dealer    ." "chips-player button          button          ." "chips-player .               .               ."; }
 
@@ -35,7 +35,7 @@ nav {
 .button__container {
   grid-area: button;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
   justify-items: center;
   align-items: center; }
 
@@ -67,6 +67,10 @@ body {
 
 nav {
   background: #272727; }
+  nav h2 {
+    text-align: center;
+    color: #F4F4F4;
+    font-size: 2.4rem; }
 
 .text__container {
   text-align: center; }
@@ -74,10 +78,11 @@ nav {
     font-size: 4rem; }
 
 .card {
-  width: 8rem;
-  height: 12rem;
+  width: 10rem;
+  height: 15rem;
   margin: 0.5rem;
-  background: white; }
+  background: #F4F4F4;
+  border-radius: 0.8rem; }
 
 .chip {
   width: 10rem;
@@ -85,20 +90,27 @@ nav {
   margin: 1rem;
   background: rgba(0, 0, 0, 0.3);
   font-size: 3rem;
-  color: white; }
+  color: #F4F4F4; }
 
 .button__container button {
   background-color: #272727;
   border: none;
-  color: white;
-  padding: 15px 32px;
+  width: 120px;
+  color: #F4F4F4;
+  padding: 1.5rem 3rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1.6rem;
   border-radius: .2rem; }
 
 @media (max-width: 600px) {
+  .card {
+    width: 8rem;
+    height: 12rem; }
   .chip {
     width: 20vw;
-    height: 20vw; } }
+    height: 20vw; }
+  .button__container button {
+    padding: 1rem 2rem;
+    width: 100px; } }
