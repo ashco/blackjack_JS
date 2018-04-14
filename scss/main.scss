@@ -40,13 +40,13 @@ nav {
   // margin-top: 5rem;
 }
 
-//Chips
-// .chip {
-
-// }
 
   //Chips
-.chip--player, .chip--bet {
+.chip--score {
+  font-size: 3rem;
+}
+
+.chip--player, .chip--pot {
   @extend %chip;
 }
 
