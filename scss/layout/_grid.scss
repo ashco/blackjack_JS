@@ -11,7 +11,7 @@
     ".            text__container text__container ."
     "chips-board  cards-player    cards-dealer    ."
     "chips-player button          button          ."
-    "chips-player .               .               ."
+    "chips-player score-player    .               ."
   }
 }
 
@@ -57,6 +57,16 @@ nav {
   align-items: center;
 }
 
+.score__container {
+  grid-area: score-player;
+
+  .player__score {
+    font-size: 3rem;
+    color: $color-white;
+    margin: 2rem;
+  }
+}
+
 @media(max-width: 600px){
   .container {
     grid-template: {
@@ -67,7 +77,7 @@ nav {
         ".               cards-dealer    cards-dealer    ."
         "text__container text__container text__container text__container"
         "chips-board     button          button          ."
-        ".               cards-player    cards-player    ."
+        "score-player    cards-player    cards-player    ."
         "chips-player    chips-player    chips-player    chips-player"
     }
   }

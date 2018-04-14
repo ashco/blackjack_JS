@@ -41,13 +41,13 @@ nav {
 }
 
 //Chips
-.chip {
-  width: 10rem;
-  height: 10rem;
-  margin: 1rem;
-  background: rgba(0, 0, 0, 0.3);
-  font-size: 3rem;
-  color: $color-white;
+// .chip {
+
+// }
+
+  //Chips
+.chip--player, .chip--bet {
+  @extend %chip;
 }
 
 .chip__container--player {
@@ -87,11 +87,11 @@ nav {
     height: 12rem;
   }
 
-  //Chips
   .chip {
     width: 20vw;
     height: 20vw;
   }
+
 
   //Buttons
   .button__container {

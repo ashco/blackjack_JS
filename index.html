@@ -20,7 +20,7 @@
     </div>
 
     <div class="chip__container--board">
-      <div class="chip">$1</div>
+      <div class="chip--bet">$1</div>
     </div>
 
     <div class="card__container--player">
@@ -34,23 +34,29 @@
     </div>
 
     <div class="chip__container--player">
-      <div class="chip">$1</div>
-      <div class="chip">$10</div>
-      <div class="chip">$100</div>
-      <div class="chip">$500</div>
+      <div class="chip--player">$1</div>
+      <div class="chip--player">$10</div>
+      <div class="chip--player">$100</div>
+      <div class="chip--player">$500</div>
     </div>
 
     <div class="button__container">
-      <button>Hit</button>
-      <button>Stand</button>
-      <button>Double</button>
-      <button>Split</button>
+      <button class="btn--hit">Hit</button>
+      <button class="btn--stand">Stand</button>
+      <button class="btn--double">Double</button>
+      <button class="btn--split">Split</button>
+    </div>
+
+    <div class="score__container">
+      <p class="player__score"></p>
     </div>
   </div>
   </main>
 
   </div>
+  <script src="./src/listeners.js"></script>
   <script src="./src/index.js"></script>
+  <script src="./src/chips.js"></script>
 </body>
 
 </html>
