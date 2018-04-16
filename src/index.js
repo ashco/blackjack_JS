@@ -45,24 +45,27 @@ const bet_update = function () {
   playerBetTotal > 0 ? element_chipScore.innerText = playerBetTotal : element_chipScore.innerText = '';
 }
 
-const randCoordGen = function (pos, rand) {
-  let coord = (playerBetArr.length - pos) * Math.PI.toFixed(rand);
-  coord = (parseInt(coord.toString().slice(-4)) / 10000);
+const coordGen = function (index, rand) {
+  if (index <= 0) {
+    return 0;
+  }
+  let coord = index * Math.PI.toFixed(rand);
+  coord = parseInt(coord.toString().slice(-4)) / 10000;
   return coord;
 }
 
 
 const elementManager_potChip = function () {
-  const chipNum = 3;
+  const chipNum = 10;
+  const axisSway = 10;
 
-  const top3 = playerBetArr.slice(-chipNum);
-  const html = top3.map((chip, i) => {
-    const topCoord = randCoordGen(-i, 7);
-    const rightCoord = randCoordGen(-i, 9);
-    console.log(topCoord, rightCoord);
+  const topChips = playerBetArr.slice(-chipNum);
+  const html = topChips.map((chip, i) => {
+    const topCoord = coordGen(playerBetArr.length - topChips.length + i, 7);
+    const rightCoord = coordGen(playerBetArr.length - topChips.length + i, 9);
 
     return `
-      <div class="chip--pot chip--${chip}" style="top: ${topCoord * 25}px; right: ${rightCoord * 25}px">${chip}</div>
+      <div class="chip--pot chip--${chip}" style="top: ${topCoord * axisSway}px; right: ${rightCoord * axisSway}px">${chip}</div>
     `;
   }).join('');
 
