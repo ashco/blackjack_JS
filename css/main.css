@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 1fr;
   justify-items: center; }
 
-.chip--player, .chip--pot {
+.chip--1, .chip--10, .chip--100, .chip--500 {
   width: 10rem;
   height: 10rem;
   margin: 1rem;
@@ -98,8 +98,23 @@ nav {
   background: #F4F4F4;
   border-radius: 0.8rem; }
 
-.chip--score {
+.chip__score {
   font-size: 3rem; }
+
+.chip--1 {
+  background: whitesmoke; }
+
+.chip--10 {
+  background: lightblue; }
+
+.chip--100 {
+  background: greenyellow; }
+
+.chip--500 {
+  background: goldenrod; }
+
+.disabled {
+  display: none; }
 
 .button__container button {
   background-color: #272727;

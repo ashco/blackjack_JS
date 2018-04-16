@@ -16,12 +16,14 @@
     </nav>
 
     <div class="text__container">
-      <h1>You ARE winner</h1>
+      <h1>Place Your Bets!</h1>
     </div>
 
     <div class="chip__container--board">
-      <div class="chip--score">0</div>
-      <div class="chip--pot">chip</div>
+      <div class="chip__score">0</div>
+      <div class="chip__pot">
+        <div class="chip--pot chip--1">chip</div>
+      </div>
     </div>
 
     <div class="card__container--player">
@@ -35,13 +37,14 @@
     </div>
 
     <div class="chip__container--player">
-      <div class="chip--player" data-bet="1">$1</div>
-      <div class="chip--player" data-bet="10">$10</div>
-      <div class="chip--player" data-bet="100">$100</div>
-      <div class="chip--player" data-bet="500">$500</div>
+      <div class="chip--player chip--1" data-bet="1">$1</div>
+      <div class="chip--player chip--10" data-bet="10">$10</div>
+      <div class="chip--player chip--100" data-bet="100">$100</div>
+      <div class="chip--player chip--500" data-bet="500">$500</div>
     </div>
 
     <div class="button__container">
+      <button class="btn--play">Play</button>
       <button class="btn--hit">Hit</button>
       <button class="btn--stand">Stand</button>
       <button class="btn--double">Double</button>
