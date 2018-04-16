@@ -45,15 +45,24 @@ const bet_update = function () {
   playerBetTotal > 0 ? element_chipScore.innerText = playerBetTotal : element_chipScore.innerText = '';
 }
 
+const randCoordGen = function (pos, rand) {
+  let coord = (playerBetArr.length - pos) * Math.PI.toFixed(rand);
+  coord = (parseInt(coord.toString().slice(-4)) / 10000);
+  return coord;
+}
+
+
 const elementManager_potChip = function () {
+  const chipNum = 3;
 
+  const top3 = playerBetArr.slice(-chipNum);
+  const html = top3.map((chip, i) => {
+    const topCoord = randCoordGen(-i, 7);
+    const rightCoord = randCoordGen(-i, 9);
+    console.log(topCoord, rightCoord);
 
-  const top3 = playerBetArr.slice(-3);
-  const html = top3.map(chip => {
-    const topCoord = 25 * (Math.random() - 0.5).toFixed(4);
-    const rightCoord = 25 * (Math.random() - 0.5).toFixed(4);
     return `
-      <div class="chip--pot chip--${chip}" style="top: ${topCoord}px; right: ${rightCoord}px">${chip}</div>
+      <div class="chip--pot chip--${chip}" style="top: ${topCoord * 25}px; right: ${rightCoord * 25}px">${chip}</div>
     `;
   }).join('');
 

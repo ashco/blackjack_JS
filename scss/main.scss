@@ -42,12 +42,16 @@ nav {
 
 
   //Chips
+.chip__pot {
+  position: relative;
+}
+
 .chip__score {
   font-size: 3rem;
 }
 
 .chip--pot {
-  position: fixed;
+  position: absolute;
 }
 
 .chip--1, .chip--10, .chip--100, .chip--500 {

@@ -12,7 +12,8 @@
   margin: 1rem;
   background: rgba(0, 0, 0, 0.3);
   font-size: 3rem;
-  border-radius: 50%; }
+  border-radius: 50%;
+  box-shadow: 0.4rem 0.4rem rgba(0, 0, 0, 0.3); }
 
 .container {
   height: 100vh;
@@ -102,11 +103,14 @@ nav {
   background: #F4F4F4;
   border-radius: 0.8rem; }
 
+.chip__pot {
+  position: relative; }
+
 .chip__score {
   font-size: 3rem; }
 
 .chip--pot {
-  position: fixed; }
+  position: absolute; }
 
 .chip--1 {
   background: whitesmoke; }
