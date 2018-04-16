@@ -46,6 +46,10 @@ nav {
   font-size: 3rem;
 }
 
+.chip--pot {
+  position: fixed;
+}
+
 .chip--1, .chip--10, .chip--100, .chip--500 {
   @extend %chip;
 }

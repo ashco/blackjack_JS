@@ -18,13 +18,14 @@ let playerBetArr = [];
 
 
 const bet_chipAdd = function () {
-  let chipSize = parseInt(this.dataset.bet);
+  const chipSize = parseInt(this.dataset.bet);
 
   playerBetArr.push(chipSize);
   playerScore = playerScore - chipSize;
 
   bet_update();
-  chipDisableCheck();
+  elementManager_potChip()
+  elementManager_playerChip();
 }
 
 const bet_chipRemove = function () {
@@ -33,24 +34,62 @@ const bet_chipRemove = function () {
   playerScore = playerScore + chipSize;
 
   bet_update();
-  chipDisableCheck();
+  elementManager_potChip()
+  elementManager_playerChip();
 }
 
 const bet_update = function () {
   const playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
 
-
   element_playerScore.innerText = playerScore;
-  element_chipScore.innerText = playerBetTotal;
+  playerBetTotal > 0 ? element_chipScore.innerText = playerBetTotal : element_chipScore.innerText = '';
 }
 
-const chipDisableCheck = function () {
+const elementManager_potChip = function () {
+
+
+  const top3 = playerBetArr.slice(-3);
+  const html = top3.map(chip => {
+    const topCoord = 25 * (Math.random() - 0.5).toFixed(4);
+    const rightCoord = 25 * (Math.random() - 0.5).toFixed(4);
+    return `
+      <div class="chip--pot chip--${chip}" style="top: ${topCoord}px; right: ${rightCoord}px">${chip}</div>
+    `;
+  }).join('');
+
+  element_chipPot.innerHTML = html;
+}
+
+const elementManager_playerChip = function () {
   element_chipPlayer.forEach(chip => {
     let chipSize = parseInt(chip.dataset.bet);
 
     chipSize > playerScore ? chip.classList.add('disabled') : chip.classList.remove('disabled');
   });
 }
+
+// const disable_potChip = function () {
+//   if (playerBetArr.length === 0) {
+//     element_chipPot.classList.add('disabled');
+//   }
+//   else {
+//     element_chipPot.classList.remove('disabled');
+//   }
+// }
+
+const winOrLose = function (result) {
+  const playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
+
+  if (result === true) {
+    playerScore = playerScore + (playerBetTotal * 2);
+  }
+  playerBetArr = [];
+  bet_update();
+  elementManager_potChip()
+  elementManager_playerChip();
+}
+
+
 
 
 const alert = () => console.log('trigger');
