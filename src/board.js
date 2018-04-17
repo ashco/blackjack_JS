@@ -1,9 +1,12 @@
 // Buttons
-const button_play = document.querySelector('.btn--play');
+const button_deal = document.querySelector('.btn--deal');
 const button_hit = document.querySelector('.btn--hit');
 const button_stand = document.querySelector('.btn--stand');
 const button_double = document.querySelector('.btn--double');
 const button_split = document.querySelector('.btn--split');
+
+// Message
+const element_message = document.querySelector('.text__container h1')
 
 // Chips
 const element_chipPlayer = document.querySelectorAll('.chip--player');
@@ -91,6 +94,7 @@ const board = (function () {
       board.bet_update();
       board.potChip_update()
       board.playerChip_update();
+      playerBetTotal > 0 ? button_deal.classList.remove('disabled') : button_deal.classList.add('disabled');
     },
 
     coordGen: (index, rand) => {
@@ -104,6 +108,10 @@ const board = (function () {
       return coord;
     },
 
+    board_message: (message) => {
+      element_message.innerText = message;
+    },
+
     alert: () => {
       console.log('trigger');
     }
@@ -111,13 +119,12 @@ const board = (function () {
 })();
 
 
-button_play.addEventListener('click', board.alert);
+
+
+button_deal.addEventListener('click', () => {
+  phaseSwitcher('DealPhase');
+});
 button_hit.addEventListener('click', board.alert);
 button_stand.addEventListener('click', board.alert);
 button_double.addEventListener('click', board.alert);
 button_split.addEventListener('click', board.alert);
-
-element_chipPot.addEventListener('click', board.bet_chipRemove);
-element_chipPlayer.forEach(chip => chip.addEventListener('click', board.bet_chipAdd));
-
-board.board_update();
