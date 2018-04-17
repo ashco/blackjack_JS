@@ -24,7 +24,8 @@ const phaseSwitcher = (phase) => {
     board.board_message('');
 
     // Buttons
-    button_deal.classList.add('disabled'); // Remove deal button
+    btnState('disable', btn_deal); // Remove deal button
+    // button_deal.classList.add('disabled');
 
     // Cards
     deal_initial();
@@ -53,14 +54,17 @@ const phaseSwitcher = (phase) => {
       return;
     }
     // presents action buttons on screen
-    button_hit.classList.remove('disabled');
-    button_stand.classList.remove('disabled');
-    button_double.classList.remove('disabled');
+    btnState('enable', btn_hit, btn_stand, btn_double);
+    // btn_hit.classList.remove('disabled');
+    // btn_stand.classList.remove('disabled');
+    // btn_double.classList.remove('disabled');
     if (cards.position.player[0].name === cards.position.player[1].name) {
-      button_split.classList.remove('disabled');
+      btnState('enable', btn_split);
+      // button_split.classList.remove('disabled');
     }
     if (cards.position.dealer[1].name === 'a') {
-      button_insure.classList.remove('disabled');
+      btnState('enable', btn_insure);
+      // button_insure.classList.remove('disabled');
     }
 
 
@@ -70,11 +74,12 @@ const phaseSwitcher = (phase) => {
   else if (phase === 'DealerPlayPhase') {
     console.log('Initialize: DealerPlayPhase');
     // Remove buttons
-    button_hit.classList.add('disabled');
-    button_stand.classList.add('disabled');
-    button_double.classList.add('disabled');
-    button_split.classList.add('disabled');
-    button_insure.classList.add('disabled');
+    btnState('disable', btn_hit, btn_stand, btn_double, btn_split, btn_insure);
+    // btn_hit.classList.add('disabled');
+    // btn_stand.classList.add('disabled');
+    // btn_double.classList.add('disabled');
+    // btn_split.classList.add('disabled');
+    // btn_insure.classList.add('disabled');
 
     // Flip first card
 

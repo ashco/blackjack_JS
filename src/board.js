@@ -1,10 +1,10 @@
 // Buttons
-const button_deal = document.querySelector('.btn--deal');
-const button_hit = document.querySelector('.btn--hit');
-const button_stand = document.querySelector('.btn--stand');
-const button_double = document.querySelector('.btn--double');
-const button_split = document.querySelector('.btn--split');
-const button_insure = document.querySelector('.btn--insure');
+const btn_deal = document.querySelector('.btn--deal');
+const btn_hit = document.querySelector('.btn--hit');
+const btn_stand = document.querySelector('.btn--stand');
+const btn_double = document.querySelector('.btn--double');
+const btn_split = document.querySelector('.btn--split');
+const btn_insure = document.querySelector('.btn--insure');
 
 // Message
 const element_message = document.querySelector('.text__container h1')
@@ -101,7 +101,8 @@ const board = (function () {
       board.boardUpdate_bet();
       board.boardUpdate_potChip()
       board.boardUpdate_playerChip();
-      playerBetTotal > 0 ? button_deal.classList.remove('disabled') : button_deal.classList.add('disabled');
+      // playerBetTotal > 0 ? btn_deal.classList.remove('disabled') : btn_deal.classList.add('disabled');
+      playerBetTotal > 0 ? btnState('enable', btn_deal) :  btnState('disable', btn_deal);
     },
 
     coordGen: (index, rand) => {
@@ -130,13 +131,3 @@ const board = (function () {
   });
 })();
 
-
-
-
-// button_deal.addEventListener('click', () => {
-//   phaseSwitcher('DealPhase');
-// });
-// button_hit.addEventListener('click', board.alert);
-// button_stand.addEventListener('click', board.alert);
-// button_double.addEventListener('click', board.alert);
-// button_split.addEventListener('click', board.alert);
