@@ -49,8 +49,10 @@ const coordGen = function (index, rand) {
   if (index <= 0) {
     return 0;
   }
+
   let coord = index * Math.PI.toFixed(rand);
   coord = parseInt(coord.toString().slice(-4)) / 10000;
+
   return coord;
 }
 
@@ -80,15 +82,6 @@ const elementManager_playerChip = function () {
   });
 }
 
-// const disable_potChip = function () {
-//   if (playerBetArr.length === 0) {
-//     element_chipPot.classList.add('disabled');
-//   }
-//   else {
-//     element_chipPot.classList.remove('disabled');
-//   }
-// }
-
 const winOrLose = function (result) {
   const playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
 
@@ -96,12 +89,11 @@ const winOrLose = function (result) {
     playerScore = playerScore + (playerBetTotal * 2);
   }
   playerBetArr = [];
+
   bet_update();
   elementManager_potChip()
   elementManager_playerChip();
 }
-
-
 
 
 const alert = () => console.log('trigger');
