@@ -1,25 +1,27 @@
 const deal_initial = () => {
   for (let i = 0; i < 2; i++) {
-    cards.position.player.unshift(cards.info[cards.position.deck.shift()]);
-    cards.position.dealer.unshift(cards.info[cards.position.deck.shift()]);
-  }
 
-  console.table(cards.position.player);
-  console.table(cards.position.dealer);
-}
-
-const deal_hit = () => {
-
-}
-
-
-const boardUpdate_initDeal = () => {
-
-  for (let i = 0; i < cards.position.player.length && i < cards.position.dealer.length; i++) {
-    addCardImg(cards.position.player[i], 'player');
-    addCardImg(cards.position.dealer[i], 'dealer');
+    deal_card('player');
+    deal_card('dealer');
   }
 }
+
+const deal_card = (target) => {
+  const targetCards = check_targetCards(target);
+
+  targetCards.unshift(cards.info[cards.position.deck.shift()]);
+
+  addCardImg(targetCards[0], target);
+}
+
+
+// const boardUpdate_initDeal = () => {
+
+//   for (let i = 0; i < cards.position.player.length && i < cards.position.dealer.length; i++) {
+//     addCardImg(cards.position.player[i], 'player');
+//     addCardImg(cards.position.dealer[i], 'dealer');
+//   }
+// }
 
 const addCardImg = (card, target) => {
   const html = `
@@ -55,6 +57,12 @@ const check_cardTotal = (target) => {
 
 const check_bust = (target) => {
   const targetCards = check_targetCards(target);
+
+
+
+
+
+
 }
 
 const check_blackJack = (target) => {

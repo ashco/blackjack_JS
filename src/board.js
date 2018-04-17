@@ -4,13 +4,14 @@ const button_hit = document.querySelector('.btn--hit');
 const button_stand = document.querySelector('.btn--stand');
 const button_double = document.querySelector('.btn--double');
 const button_split = document.querySelector('.btn--split');
+const button_insure = document.querySelector('.btn--insure');
 
 // Message
 const element_message = document.querySelector('.text__container h1')
 
 // Cards
-const element_playerCards = document.querySelector('.card__container--player');
-const element_dealerCards = document.querySelector('.card__container--dealer');
+const element_playerCards = document.querySelector('.card__images--player');
+const element_dealerCards = document.querySelector('.card__images--dealer');
 
 // Chips
 const element_chipPlayer = document.querySelectorAll('.chip--player');
@@ -19,6 +20,8 @@ const element_chipPot = document.querySelector('.chip__pot');
 // Score
 const element_chipScore = document.querySelector('.chip__score');
 const element_playerScore = document.querySelector('.player__score');
+const element_playerCardTotal = document.querySelector('.card__score--player');
+const element_dealerCardTotal = document.querySelector('.card__score--dealer');
 
 // Board Closure
 const board = (function () {

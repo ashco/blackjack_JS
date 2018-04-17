@@ -1,3 +1,5 @@
+let blackJack = false;
+
 const phaseSwitcher = (phase) => {
   if (phase === 'PlaceYourBetsPhase'){
     console.log('Initialize: PlaceYourBetsPhase');
@@ -26,10 +28,10 @@ const phaseSwitcher = (phase) => {
 
     // Cards
     deal_initial();
-    boardUpdate_initDeal();
+    // boardUpdate_initDeal();
 
 
-    // phaseSwitcher('MainDecisionPhase');
+    phaseSwitcher('MainDecisionPhase');
 
 
   }
@@ -37,11 +39,32 @@ const phaseSwitcher = (phase) => {
 
   else if (phase === 'MainDecisionPhase') {
     console.log('Initialize: MainDecisionPhase');
+
+    let playerTotal = check_cardTotal('player');
+    let dealerTotal = check_cardTotal('dealer');
+
     // presents card totals on screen
+    element_playerCardTotal.innerText = playerTotal;
+    element_dealerCardTotal.innerText = dealerTotal;
+
+    // check for blackjack
+    if (playerTotal === 21) {
+      phaseSwitcher('DealerPlayPhase');
+      blackJack = true;
+      return;
+    }
     // presents action buttons on screen
-      // hit, stand, insure, double, split
-    // logic for action buttons takes place here
-    // if 21, blackjack!
+    button_hit.classList.remove('disabled');
+    button_stand.classList.remove('disabled');
+    button_double.classList.remove('disabled');
+    if (cards.position.player[0].name === cards.position.player[1].name) {
+      button_split.classList.remove('disabled');
+    }
+    if (cards.position.dealer[1].name === 'a') {
+      button_insure.classList.remove('disabled');
+    }
+
+
   }
 
 

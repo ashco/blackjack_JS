@@ -28,6 +28,10 @@ nav {
 }
 
 //Cards
+.card__score--player, .card__score--dealer {
+  @extend %card__score;
+}
+
 .card {
   font-size: 3rem;
   width: 10rem;
