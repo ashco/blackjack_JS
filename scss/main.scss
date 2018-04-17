@@ -29,6 +29,7 @@ nav {
 
 //Cards
 .card {
+  font-size: 3rem;
   width: 10rem;
   height: 15rem;
   margin: 0.5rem;
@@ -40,6 +41,13 @@ nav {
   // margin-top: 5rem;
 }
 
+.color--red {
+  color: $color-red;
+}
+
+.color--black {
+  color: $color-black;
+}
 
   //Chips
 .chip__pot {

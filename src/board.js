@@ -8,6 +8,10 @@ const button_split = document.querySelector('.btn--split');
 // Message
 const element_message = document.querySelector('.text__container h1')
 
+// Cards
+const element_playerCards = document.querySelector('.card__container--player');
+const element_dealerCards = document.querySelector('.card__container--dealer');
+
 // Chips
 const element_chipPlayer = document.querySelectorAll('.chip--player');
 const element_chipPot = document.querySelector('.chip__pot');
@@ -121,9 +125,9 @@ const board = (function () {
 
 
 
-button_deal.addEventListener('click', () => {
-  phaseSwitcher('DealPhase');
-});
+// button_deal.addEventListener('click', () => {
+//   phaseSwitcher('DealPhase');
+// });
 button_hit.addEventListener('click', board.alert);
 button_stand.addEventListener('click', board.alert);
 button_double.addEventListener('click', board.alert);

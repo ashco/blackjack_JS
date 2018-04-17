@@ -1,25 +1,34 @@
 const phaseSwitcher = (phase) => {
   if (phase === 'PlaceYourBetsPhase'){
     console.log('Initialize: PlaceYourBetsPhase');
-
-    board.board_message('Place Your Bets'); // Message: "place your bets"
-    board.boardUpdate_all(); // Place bets, interact with chips in board
-
-    // Add event listeners
+    // Event listeners
     element_chipPot.addEventListener('click', board.bet_chipRemove);
     element_chipPlayer.forEach(chip => chip.addEventListener('click', board.bet_chipAdd));
+
+    // Message
+    board.board_message('Place Your Bets');
+    board.boardUpdate_all(); // Place bets, interact with chips in board
+
   }
 
 
   else if (phase === 'DealPhase') {
     console.log('Initialize: DealPhase');
+    // Event listeners
+    element_chipPot.removeEventListener('click', board.bet_chipRemove);
+    element_chipPlayer.forEach(chip => chip.removeEventListener('click', board.bet_chipAdd));
 
-    board.board_message(''); // Remove message
+    // Message
+    board.board_message('');
+
+    // Buttons
     button_deal.classList.add('disabled'); // Remove deal button
 
-    // Assign cards to player and dealer
+    // Cards
     deal_initial();
-    // Display cards on screen
+    boardUpdate_initialDeal();
+    // phaseSwitcher('MainDecisionPhase');
+
 
   }
 

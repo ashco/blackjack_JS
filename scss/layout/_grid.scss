@@ -28,12 +28,12 @@ nav {
 }
 
 .card__container--player {
-  @extend %card__container;
+  // @extend %card__container;
   grid-area: cards-player;
 }
 
 .card__container--dealer {
-  @extend %card__container;
+  // @extend %card__container;
   grid-area: cards-dealer;
 }
 

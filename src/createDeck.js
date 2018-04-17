@@ -20,7 +20,7 @@ function Card (value, name, suit, color) {
 function createDeck () {
   this.names = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
   this.suits = ['hearts', 'diamonds', 'spades', 'clubs'];
-  this.color = ['Black', 'Red'];
+  this.color = ['black', 'red'];
   for (let i = 0; i < 4; i++) {
     for (let s = 0; s < this.suits.length; s++) {
       for (let n = 0; n < this.names.length; n++) {
