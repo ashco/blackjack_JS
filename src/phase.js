@@ -26,7 +26,9 @@ const phaseSwitcher = (phase) => {
 
     // Cards
     deal_initial();
-    boardUpdate_initialDeal();
+    boardUpdate_initDeal();
+
+
     // phaseSwitcher('MainDecisionPhase');
 
 
