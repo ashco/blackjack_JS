@@ -1,1 +1,3 @@
+createDeck();
+shuffle();
 phaseSwitcher('PlaceYourBetsPhase');

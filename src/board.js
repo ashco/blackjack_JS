@@ -31,7 +31,7 @@ const board = (function () {
       playerBetArr.push(chipSize);
       playerScore = playerScore - chipSize;
 
-      board.board_update();
+      board.boardUpdate_all();
     },
 
 
@@ -40,7 +40,7 @@ const board = (function () {
 
       playerScore = playerScore + chipSize;
 
-      board.board_update()
+      board.boardUpdate_all()
     },
 
 
@@ -52,11 +52,11 @@ const board = (function () {
       }
       playerBetArr = [];
 
-      board.board_update();
+      board.boardUpdate_all();
     },
 
 
-    bet_update: () => {
+    boardUpdate_bet: () => {
       playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
 
       element_playerScore.innerText = playerScore;
@@ -64,9 +64,9 @@ const board = (function () {
     },
 
 
-    potChip_update: () => {
+    boardUpdate_potChip: () => {
       const chipNum = 10;
-      const sway = 10;
+      const sway = 7;
 
       const topChips = playerBetArr.slice(-chipNum);
       const html = topChips.map((chip, i) => {
@@ -82,7 +82,7 @@ const board = (function () {
     },
 
 
-    playerChip_update: () => {
+    boardUpdate_playerChip: () => {
       element_chipPlayer.forEach(chip => {
         let chipSize = parseInt(chip.dataset.betsize);
         chipSize > playerScore ? chip.classList.add('disabled') : chip.classList.remove('disabled');
@@ -90,10 +90,10 @@ const board = (function () {
     },
 
 
-    board_update: () => {
-      board.bet_update();
-      board.potChip_update()
-      board.playerChip_update();
+    boardUpdate_all: () => {
+      board.boardUpdate_bet();
+      board.boardUpdate_potChip()
+      board.boardUpdate_playerChip();
       playerBetTotal > 0 ? button_deal.classList.remove('disabled') : button_deal.classList.add('disabled');
     },
 
