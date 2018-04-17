@@ -9,7 +9,8 @@ const cards = {
 };
 
 //generates card object attributess
-function Card (value, name, suit, color) {
+function Card (id, value, name, suit, color) {
+  this.id = id;
   this.value = value;
   this.name = name;
   this.suit = suit;
@@ -25,10 +26,10 @@ function createDeck () {
     for (let s = 0; s < this.suits.length; s++) {
       for (let n = 0; n < this.names.length; n++) {
         if (s > 1) {
-          cards.info.push(new Card(n + 1, this.names[n], this.suits[s], this.color[0]));
+          cards.info.push(new Card(((i + 1) * (s + 1) * (n + 1) - 1), n + 1, this.names[n], this.suits[s], this.color[0]));
         }
         else {
-          cards.info.push(new Card(n + 1, this.names[n], this.suits[s], this.color[1]));
+          cards.info.push(new Card(((i + 1) * (s + 1) * (n + 1) - 1), n + 1, this.names[n], this.suits[s], this.color[1]));
         }
       }
     }

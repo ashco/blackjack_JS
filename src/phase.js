@@ -28,7 +28,6 @@ const phaseSwitcher = (phase) => {
 
     // Cards
     deal_initial();
-    // boardUpdate_initDeal();
 
 
     phaseSwitcher('MainDecisionPhase');
@@ -44,8 +43,8 @@ const phaseSwitcher = (phase) => {
     let dealerTotal = check_cardTotal('dealer');
 
     // presents card totals on screen
-    element_playerCardTotal.innerText = playerTotal;
-    element_dealerCardTotal.innerText = dealerTotal;
+    board.board_cardTotal('player', playerTotal);
+    board.board_cardTotal('dealer', dealerTotal);
 
     // check for blackjack
     if (playerTotal === 21) {
@@ -70,8 +69,17 @@ const phaseSwitcher = (phase) => {
 
   else if (phase === 'DealerPlayPhase') {
     console.log('Initialize: DealerPlayPhase');
-    // dealer bot will add cards until they reach 16 - 21 range
+    // Remove buttons
+    button_hit.classList.add('disabled');
+    button_stand.classList.add('disabled');
+    button_double.classList.add('disabled');
+    button_split.classList.add('disabled');
+    button_insure.classList.add('disabled');
 
+    // Flip first card
+
+    // dealer bot will add cards until they reach 16 - 21 range
+    botDealer();
   }
 
 

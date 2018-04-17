@@ -119,8 +119,13 @@ const board = (function () {
       element_message.innerText = message;
     },
 
-    alert: () => {
-      console.log('trigger');
+    board_cardTotal: (target, total) => {
+      if (target === 'player') {
+        element_playerCardTotal.innerText = total;
+      }
+      else if (target === 'dealer') {
+        element_dealerCardTotal.innerText = total;
+      }
     }
   });
 })();
@@ -131,7 +136,7 @@ const board = (function () {
 // button_deal.addEventListener('click', () => {
 //   phaseSwitcher('DealPhase');
 // });
-button_hit.addEventListener('click', board.alert);
-button_stand.addEventListener('click', board.alert);
-button_double.addEventListener('click', board.alert);
-button_split.addEventListener('click', board.alert);
+// button_hit.addEventListener('click', board.alert);
+// button_stand.addEventListener('click', board.alert);
+// button_double.addEventListener('click', board.alert);
+// button_split.addEventListener('click', board.alert);

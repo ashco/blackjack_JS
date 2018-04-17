@@ -2,6 +2,13 @@
   color: white;
   font-size: 2.4rem; }
 
+.card--front, .card--back {
+  font-size: 3rem;
+  width: 10rem;
+  height: 15rem;
+  margin: 0.5rem;
+  border-radius: 0.8rem; }
+
 .chip--1, .chip--10, .chip--100, .chip--500 {
   display: flex;
   justify-content: center;
@@ -81,7 +88,7 @@ body {
   box-sizing: inherit; }
 
 .container {
-  background: #2B5E1C; }
+  background: #438f2c; }
 
 nav {
   background: #272727; }
@@ -95,13 +102,11 @@ nav {
   .text__container h1 {
     font-size: 4rem; }
 
-.card {
-  font-size: 3rem;
-  width: 10rem;
-  height: 15rem;
-  margin: 0.5rem;
-  background: #F4F4F4;
-  border-radius: 0.8rem; }
+.card--front {
+  background: #F4F4F4; }
+
+.card--back {
+  background: #7474bd; }
 
 .color--red {
   color: orangered; }
