@@ -102,8 +102,9 @@ const board = (function () {
       board.boardUpdate_potChip()
       board.boardUpdate_playerChip();
       // playerBetTotal > 0 ? btn_deal.classList.remove('disabled') : btn_deal.classList.add('disabled');
-      playerBetTotal > 0 ? btnState('enable', btn_deal) :  btnState('disable', btn_deal);
+      playerBetTotal > 0 ? btn.state('enable', btn_deal) :  btn.state('disable', btn_deal);
     },
+
 
     coordGen: (index, rand) => {
       if (index <= 0) {
@@ -116,9 +117,11 @@ const board = (function () {
       return coord;
     },
 
+
     board_message: (message) => {
       element_message.innerText = message;
     },
+
 
     board_cardTotal: (target, total) => {
       if (target === 'player') {
@@ -127,7 +130,15 @@ const board = (function () {
       else if (target === 'dealer') {
         element_dealerCardTotal.innerText = total;
       }
-    }
+    },
+
+
+
+
+
+
+
+
   });
 })();
 

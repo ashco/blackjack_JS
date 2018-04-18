@@ -1,3 +1,4 @@
-createDeck();
-shuffle();
-phaseSwitcher('PlaceYourBetsPhase');
+cards.createDeck();
+cards.blackJackizer();
+cards.shuffle();
+cards.phaseSwitcher('PlaceYourBetsPhase');
