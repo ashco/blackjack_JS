@@ -101,7 +101,6 @@ const board = (function () {
       board.boardUpdate_bet();
       board.boardUpdate_potChip()
       board.boardUpdate_playerChip();
-      // playerBetTotal > 0 ? btn_deal.classList.remove('disabled') : btn_deal.classList.add('disabled');
       playerBetTotal > 0 ? btn.state('enable', btn_deal) :  btn.state('disable', btn_deal);
     },
 
@@ -131,11 +130,6 @@ const board = (function () {
         element_dealerCardTotal.innerText = total;
       }
     },
-
-
-
-
-
 
 
 
