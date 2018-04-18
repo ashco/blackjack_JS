@@ -32,9 +32,20 @@ const board = (function () {
 
   return ({
 
-    bet_amount: () => {
-      return [playerScore, playerBetTotal];
+    bet_info: () => {
+      return [playerScore, playerBetTotal, playerBetArr];
     },
+
+    bet_clear: () => {
+      playerBetTotal = 0;
+      playerBetArr = [];
+      board.boardUpdate_potChip();
+      board.boardUpdate_bet();
+    },
+
+    // bet_amount: (amount) => {
+    //   playerBetTotal = amount;
+    // },
 
     bet_chipAdd: (e) => {
       // console.log();
@@ -60,7 +71,7 @@ const board = (function () {
       playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
 
       playerScore = playerScore + (playerBetTotal * multiplier);
-      playerBetArr = [];
+      // playerBetArr = [];
 
       // return playerBetTotal;
     },

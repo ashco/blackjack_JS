@@ -134,6 +134,8 @@ const cards = (function() {
     phaseSwitcher: function (phase) {
       if (phase === 'PlaceYourBetsPhase'){
         console.log('Initialize: PlaceYourBetsPhase');
+        // console.log(playerTotal);
+        // console.log(dealerTotal);
 
         // Chip Event Listeners
         element_chipPot.addEventListener('click', board.bet_chipRemove);
@@ -253,7 +255,8 @@ const cards = (function() {
         // Remove previous cards and scores
         playerTotal = 0;
         dealerTotal = 0;
-        targetCards = [];
+        cardObj.position.player = [];
+        cardObj.position.dealer = [];
         element_playerCards.innerHTML = '';
         element_dealerCards.innerHTML = '';
         element_playerCardTotal.innerHTML = '';
@@ -267,14 +270,14 @@ const cards = (function() {
           return;
         }
 
-        cards.phaseSwitcher('PlaceYourBetsPhase');
-        // const [playerScore, playerBetTotal] = board.bet_amount();
-        // console.log(playerScore, playerBetTotal);
-        // add in previous bet amount if $ is available
-        // if () {
-
-        // }
+        const [playerScore, playerBetTotal] = board.bet_info();
+        console.log(playerScore, playerBetTotal);
+        // Remove previous bet if can't cover
+        if (playerBetTotal > playerScore) {
+          board.bet_clear();
+        }
           // if can't cover, start with nothing
+        cards.phaseSwitcher('PlaceYourBetsPhase');
 
       }
 
