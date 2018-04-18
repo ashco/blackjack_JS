@@ -91,19 +91,40 @@ const cards = (function() {
 
 
     check_cardTotal: function (target) {
-      targetCards = cards.check_targetCards(target);
-      let totalValue = targetCards.reduce((total, current) => total + current.value, 0);
+      let totalValue;
 
+      targetCards = cards.check_targetCards(target);
+      totalValue = targetCards.reduce((total, current) => total + current.value, 0);
+
+      // Logic to knock ace down from 11 to 1
       if (totalValue > 21) {
         console.log('Potential Bust: Checking for Ace');
-        targetCards.forEach(card => {
-          if (card.name === 'a') {
-            console.log('ACE OF BASE');
-            console.log(card);
-          }
-        });
+        // Determine if Ace with value of 11 is present...
+        const aceIndex = targetCards.findIndex(card => card.name === 'a' && card.value === 11);
+        // If it is..
+        if (aceIndex >= 0) {
+          // Set Ace value to 1
+          targetCards[aceIndex].value = 1;
+          // Recalculate new total value
+          totalValue = targetCards.reduce((total, current) => total + current.value, 0);
+        }
       }
       return totalValue;
+    },
+
+
+    botDealer: function() {
+      dealerTotal = cards.check_cardTotal('dealer');
+
+      if (playerTotal > 21) {
+        cards.phaseSwitcher('ScoringPhase');
+      }
+      while (dealerTotal < 16) {
+        cards.deal_card('dealer');
+        dealerTotal = cards.check_cardTotal('dealer');
+        board.board_cardTotal('dealer', dealerTotal);
+      }
+      cards.phaseSwitcher('ScoringPhase');
     },
 
 
@@ -155,7 +176,7 @@ const cards = (function() {
 
         // Check for player blackjack
         if (playerTotal === 21) {
-          phaseSwitcher('DealerPlayPhase');
+          cards.phaseSwitcher('DealerPlayPhase');
           return;
         }
 
@@ -181,7 +202,7 @@ const cards = (function() {
         // Recalculate revealed dealer total
 
         // Dealer bot will add cards until 16 <=
-        botDealer();
+        cards.botDealer();
       }
 
 

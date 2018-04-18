@@ -21,17 +21,17 @@ const addCardImg = (target, card) => {
 
 
 
-const botDealer = () => {
-  let playerTotal = cards.check_cardTotal('player');
-  let dealerTotal = cards.check_cardTotal('dealer');
+// const botDealer = () => {
+//   let playerTotal = cards.check_cardTotal('player');
+//   let dealerTotal = cards.check_cardTotal('dealer');
 
-  if (playerTotal > 21) {
-    cards.phaseSwitcher('ScoringPhase');
-  }
-  while (dealerTotal < 16) {
-    cards.deal_card('dealer');
-    dealerTotal = cards.check_cardTotal('dealer');
-    board.board_cardTotal('dealer', dealerTotal);
-  }
-  cards.phaseSwitcher('ScoringPhase');
-}
+//   if (playerTotal > 21) {
+//     cards.phaseSwitcher('ScoringPhase');
+//   }
+//   while (dealerTotal < 16) {
+//     cards.deal_card('dealer');
+//     dealerTotal = cards.check_cardTotal('dealer');
+//     board.board_cardTotal('dealer', dealerTotal);
+//   }
+//   cards.phaseSwitcher('ScoringPhase');
+// }
