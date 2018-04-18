@@ -18,20 +18,3 @@ const addCardImg = (target, card) => {
     element_dealerCards.innerHTML += html;
   }
 }
-
-
-
-// const botDealer = () => {
-//   let playerTotal = cards.check_cardTotal('player');
-//   let dealerTotal = cards.check_cardTotal('dealer');
-
-//   if (playerTotal > 21) {
-//     cards.phaseSwitcher('ScoringPhase');
-//   }
-//   while (dealerTotal < 16) {
-//     cards.deal_card('dealer');
-//     dealerTotal = cards.check_cardTotal('dealer');
-//     board.board_cardTotal('dealer', dealerTotal);
-//   }
-//   cards.phaseSwitcher('ScoringPhase');
-// }

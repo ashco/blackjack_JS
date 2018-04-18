@@ -1,6 +1,6 @@
 const cards = (function() {
 
-  const cardObj = {
+  let cardObj = {
     info: [],
     position: {
       deck: [],
@@ -114,10 +114,12 @@ const cards = (function() {
 
 
     botDealer: function() {
+      playerTotal = cards.check_cardTotal('player');
       dealerTotal = cards.check_cardTotal('dealer');
 
       if (playerTotal > 21) {
         cards.phaseSwitcher('ScoringPhase');
+        return;
       }
       while (dealerTotal < 16) {
         cards.deal_card('dealer');
@@ -209,27 +211,82 @@ const cards = (function() {
       else if (phase === 'ScoringPhase') {
         console.log('Initialize: ScoringPhase');
         // scores are compaired and winner is chosen
-        // winOrLose function is triggered and payout is given
-        // message is presented
-          //"Dealer Wins"
-          //"Win $12"
-          //"Push"
+        playerTotal = cards.check_cardTotal('player');
 
-        //Blackjack wins 1.5x payout
+        console.log(playerTotal);
+        console.log(dealerTotal);
+
+        if (playerTotal === 21 && cardObj.position.player.length === 2 && playerTotal > dealerTotal) {
+          const winValue = board.winOrLose(2.5);
+          board.board_message(`Blackjack! Win $${winValue}`);
+        }
+        // Player Lose
+        else if (
+          playerTotal > 21 ||
+          dealerTotal <= 21 && playerTotal <= 21 && playerTotal < dealerTotal
+        ) {
+          board.board_message('Dealer Wins!');
+          board.winOrLose(0);
+        }
+        // Player Draw
+        else if (playerTotal === dealerTotal) {
+          board.board_message('Draw!');
+          board.winOrLose(1);
+        }
+        // Player Win
+        else if (
+          dealerTotal > 21 ||
+          dealerTotal <= 21 && playerTotal <= 21 && playerTotal > dealerTotal
+        ) {
+          const winValue = board.winOrLose(2);
+          board.board_message(`Win $${winValue}`);
+        }
+
+        board.boardUpdate_all();
+        cards.phaseSwitcher('NewRoundPhase');
       }
 
 
       else if (phase === 'NewRoundPhase') {
         console.log('Initialize: NewRoundPhase');
+
+        // Remove previous cards and scores
+        playerTotal = 0;
+        dealerTotal = 0;
+        targetCards = [];
+        element_playerCards.innerHTML = '';
+        element_dealerCards.innerHTML = '';
+        element_playerCardTotal.innerHTML = '';
+        element_dealerCardTotal.innerHTML = '';
+
+
         // check if deck needs to be shuffled
-        // add in previous bet amount
+        if (cardObj.position.deck.length < 180) {
+          board.board_message(`Shuffling..`);
+          cards.phaseSwitcher('PlaceYourBetsPhase');
+          return;
+        }
+
+        cards.phaseSwitcher('PlaceYourBetsPhase');
+        // const [playerScore, playerBetTotal] = board.bet_amount();
+        // console.log(playerScore, playerBetTotal);
+        // add in previous bet amount if $ is available
+        // if () {
+
+        // }
           // if can't cover, start with nothing
+
       }
 
 
       else if (phase === 'ShufflePhase') {
         console.log('Initialize: ShufflePhase');
         // if not enough cards in deck, shuffle full deck
+        cardObj = {};
+        cards.createDeck();
+        cards.blackJackizer();
+        cards.shuffle();
+        cards.phaseSwitcher('NewRoundPhase');
       }
     }
   });
