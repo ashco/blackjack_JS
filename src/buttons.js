@@ -27,7 +27,25 @@ const btn = {
 
   stand: function () {
     cards.phaseSwitcher('DealerPlayPhase');
+  },
+
+
+  double: function (target) {
+    // Double current bet
+    board.bet_double();
+
+    cards.deal_card(target);
+
+    // Check and update new card total number
+    const cardTotal = cards.check_cardTotal(target)
+    board.board_cardTotal(target, cardTotal);
+
+    // Move to dealer turn
+    cards.phaseSwitcher('DealerPlayPhase');
+
   }
+
+
 }
 
 

@@ -36,6 +36,11 @@ const board = (function () {
       return [playerScore, playerBetTotal, playerBetArr];
     },
 
+    bet_double: () => {
+      playerScore = playerScore - playerBetTotal;
+      playerBetTotal = playerBetTotal * 2;
+    },
+
     bet_clear: () => {
       playerBetTotal = 0;
       playerBetArr = [];
@@ -43,16 +48,12 @@ const board = (function () {
       board.boardUpdate_bet();
     },
 
-    // bet_amount: (amount) => {
-    //   playerBetTotal = amount;
-    // },
-
     bet_chipAdd: (e) => {
-      // console.log();
       const chipSize = parseInt(e.target.dataset.betsize);
 
       playerBetArr.push(chipSize);
       playerScore = playerScore - chipSize;
+      playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
 
       board.boardUpdate_all();
     },
@@ -62,18 +63,15 @@ const board = (function () {
       const chipSize = playerBetArr.pop();
 
       playerScore = playerScore + chipSize;
+      playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
 
       board.boardUpdate_all()
     },
 
 
     winOrLose: (multiplier) => {
-      playerBetTotal = playerBetArr.reduce((total, current) => total + current, 0);
-
       playerScore = playerScore + (playerBetTotal * multiplier);
-      // playerBetArr = [];
-
-      // return playerBetTotal;
+      return playerBetTotal;
     },
 
 

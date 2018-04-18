@@ -245,7 +245,7 @@ const cards = (function() {
         }
 
         board.boardUpdate_all();
-        cards.phaseSwitcher('NewRoundPhase');
+        // cards.phaseSwitcher('NewRoundPhase');
       }
 
 
