@@ -2,11 +2,19 @@ const btn = {
   state: function (state, buttons) {
     const args = Array.from(arguments);
     args.shift();
-    if (state === 'enable') {
-      args.forEach(arg => arg.classList.remove('disabled'));
+    if (state === 'show') {
+      args.forEach(arg => arg.classList.remove('hidden'));
+    }
+    else if (state === 'hide') {
+      args.forEach(arg => arg.classList.add('hidden'));
+    }
+    else if (state === 'enable') {
+      args.forEach(arg => arg.disabled = false);
+
     }
     else if (state === 'disable') {
-      args.forEach(arg => arg.classList.add('disabled'));
+      args.forEach(arg => arg.disabled = true);
+
     }
   },
 
@@ -37,7 +45,7 @@ const btn = {
     cards.deal_card(target);
 
     // Check and update new card total number
-    const cardTotal = cards.check_cardTotal(target)
+    const cardTotal = cards.check_cardTotal(target);
     board.board_cardTotal(target, cardTotal);
 
     // Move to dealer turn

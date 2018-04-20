@@ -8,6 +8,7 @@ const btn_insure = document.querySelector('.btn--insure');
 
 // Message
 const element_message = document.querySelector('.text__container h1')
+const fs_message = document.querySelector('.fullscreen__message');
 
 // Cards
 const element_playerCards = document.querySelector('.card__images--player');
@@ -30,6 +31,8 @@ const board = (function () {
   let playerBetTotal = 0;
   let playerBetArr = [];
 
+  let doublePot = false;
+
   return ({
 
     bet_info: () => {
@@ -38,7 +41,12 @@ const board = (function () {
 
     bet_double: () => {
       playerScore = playerScore - playerBetTotal;
-      playerBetTotal = playerBetTotal * 2;
+      playerBetTotal = playerBetTotal + playerBetTotal;
+      playerBetArr = playerBetArr.concat(playerBetArr);
+
+      doublePot = true;
+
+      board.boardUpdate_potChip();
     },
 
     bet_clear: () => {
@@ -70,7 +78,23 @@ const board = (function () {
 
 
     winOrLose: (multiplier) => {
-      playerScore = playerScore + (playerBetTotal * multiplier);
+      let doubleMulti = 1;
+
+      if (doublePot) {
+        console.log('trigger!');
+
+        doubleMulti = 2;
+        doublePot = false;
+        playerBetArr.splice(-playerBetArr.length / 2);
+      }
+      // else if (doublePot && playerBetArr.length % 2 === 1) {
+        //   playerBetArr.pop(-playerBetArr.length / 2);
+        // }
+
+
+      playerScore = playerScore + (playerBetTotal * multiplier * doubleMulti);
+
+
       return playerBetTotal;
     },
 
@@ -104,7 +128,7 @@ const board = (function () {
     boardUpdate_playerChip: () => {
       element_chipPlayer.forEach(chip => {
         let chipSize = parseInt(chip.dataset.betsize);
-        chipSize > playerScore ? chip.classList.add('disabled') : chip.classList.remove('disabled');
+        chipSize > playerScore ? chip.classList.add('hidden') : chip.classList.remove('hidden');
       });
     },
 
@@ -144,7 +168,14 @@ const board = (function () {
     },
 
 
+    score_message: (message) => {
+      fs_message.innerHTML = message;
+    }
+
+
 
   });
 })();
+
+
 

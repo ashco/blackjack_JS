@@ -24,7 +24,7 @@ const cards = (function() {
     },
 
 
-    createDeck: function () {
+    createDeck: function () {btn.state('disable', btn_deal)
       this.names = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
       this.suits = ['hearts', 'diamonds', 'spades', 'clubs'];
       this.color = ['black', 'red'];
@@ -98,7 +98,6 @@ const cards = (function() {
 
       // Logic to knock ace down from 11 to 1
       if (totalValue > 21) {
-        console.log('Potential Bust: Checking for Ace');
         // Determine if Ace with value of 11 is present...
         const aceIndex = targetCards.findIndex(card => card.name === 'a' && card.value === 11);
         // If it is..
@@ -132,165 +131,211 @@ const cards = (function() {
 
     // Game Phase Function
     phaseSwitcher: function (phase) {
-      if (phase === 'PlaceYourBetsPhase'){
-        console.log('Initialize: PlaceYourBetsPhase');
-        // console.log(playerTotal);
-        // console.log(dealerTotal);
+      switch (phase) {
+        case 'PlaceYourBetsPhase':
+        // if (phase === 'PlaceYourBetsPhase'){
+          console.log('Initialize: PlaceYourBetsPhase');
 
-        // Chip Event Listeners
-        element_chipPot.addEventListener('click', board.bet_chipRemove);
-        element_chipPlayer.forEach(chip => chip.addEventListener('click', board.bet_chipAdd));
+          // Chip Event Listeners
+          element_chipPot.addEventListener('click', board.bet_chipRemove);
+          element_chipPlayer.forEach(chip => chip.addEventListener('click', board.bet_chipAdd));
 
-        // Message
-        board.board_message('Place Your Bets');
-        // board.boardUpdate_all(); // Place bets, interact with chips in board
+          // Message
+          board.board_message('Place Your Bets');
+          // board.boardUpdate_all(); // Place bets, interact with chips in board
 
-      }
-
-
-      else if (phase === 'DealPhase') {
-        console.log('Initialize: DealPhase');
-
-        // Chip Event Listeners
-        element_chipPot.removeEventListener('click', board.bet_chipRemove);
-        element_chipPlayer.forEach(chip => chip.removeEventListener('click', board.bet_chipAdd));
-
-        // Message
-        board.board_message('');
-
-        // Buttons
-        btn.state('disable', btn_deal); // Remove deal button
-
-        // Deal Cards
-        cards.deal_initial();
-
-        // Next Phase
-        cards.phaseSwitcher('MainDecisionPhase');
-      }
+          // Buttons
+          btn.state('show', btn_deal)
+          break;
 
 
-      else if (phase === 'MainDecisionPhase') {
-        console.log('Initialize: MainDecisionPhase');
+        // else if (phase === 'DealPhase') {
+        case 'DealPhase':
+          console.log('Initialize: DealPhase');
 
-        // Calculate and present card totals
-        playerTotal = cards.check_cardTotal('player');
-        dealerTotal = cards.check_cardTotal('dealer');
-        board.board_cardTotal('player', playerTotal);
-        board.board_cardTotal('dealer', dealerTotal);
+          // Chip Event Listeners
+          element_chipPot.removeEventListener('click', board.bet_chipRemove);
+          element_chipPlayer.forEach(chip => chip.removeEventListener('click', board.bet_chipAdd));
 
-        // Check for player blackjack
-        if (playerTotal === 21) {
-          cards.phaseSwitcher('DealerPlayPhase');
-          return;
-        }
+          // Message
+          board.board_message('');
 
-        // presents action buttons on screen
-        btn.state('enable', btn_hit, btn_stand, btn_double);
-        if (cardObj.position.player[0].name === cardObj.position.player[1].name) {
-          btn.state('enable', btn_split);
-        }
-        if (cardObj.position.dealer[1].name === 'a') {
-          btn.state('enable', btn_insure);
-        }
-      }
+          // Buttons
+          btn.state('hide', btn_deal); // Remove deal button
+
+          // Deal Cards
+          cards.deal_initial();
+
+          // Next Phase
+          cards.phaseSwitcher('MainDecisionPhase');
+          break;
 
 
-      else if (phase === 'DealerPlayPhase') {
-        console.log('Initialize: DealerPlayPhase');
 
-        // Remove buttons
-        btn.state('disable', btn_hit, btn_stand, btn_double, btn_split, btn_insure);
+        // else if (phase === 'MainDecisionPhase') {
+        case 'MainDecisionPhase':
+          console.log('Initialize: MainDecisionPhase');
 
-        // Flip first card
+          // Calculate and present card totals
+          playerTotal = cards.check_cardTotal('player');
+          dealerTotal = cards.check_cardTotal('dealer');
+          board.board_cardTotal('player', playerTotal);
+          board.board_cardTotal('dealer', dealerTotal);
 
-        // Recalculate revealed dealer total
+          // Check for player blackjack
+          if (playerTotal === 21) {
+            cards.phaseSwitcher('DealerPlayPhase');
+            return;
+          }
 
-        // Dealer bot will add cards until 16 <=
-        cards.botDealer();
-      }
-
-
-      else if (phase === 'ScoringPhase') {
-        console.log('Initialize: ScoringPhase');
-        // scores are compaired and winner is chosen
-        playerTotal = cards.check_cardTotal('player');
-
-        console.log(playerTotal);
-        console.log(dealerTotal);
-
-        if (playerTotal === 21 && cardObj.position.player.length === 2 && playerTotal > dealerTotal) {
-          const winValue = board.winOrLose(2.5);
-          board.board_message(`Blackjack! Win $${winValue}`);
-        }
-        // Player Lose
-        else if (
-          playerTotal > 21 ||
-          dealerTotal <= 21 && playerTotal <= 21 && playerTotal < dealerTotal
-        ) {
-          board.board_message('Dealer Wins!');
-          board.winOrLose(0);
-        }
-        // Player Draw
-        else if (playerTotal === dealerTotal) {
-          board.board_message('Draw!');
-          board.winOrLose(1);
-        }
-        // Player Win
-        else if (
-          dealerTotal > 21 ||
-          dealerTotal <= 21 && playerTotal <= 21 && playerTotal > dealerTotal
-        ) {
-          const winValue = board.winOrLose(2);
-          board.board_message(`Win $${winValue}`);
-        }
-
-        board.boardUpdate_all();
-        // cards.phaseSwitcher('NewRoundPhase');
-      }
+          // presents action buttons on screen
+          btn.state('show', btn_hit, btn_stand, btn_double);
+          if (cardObj.position.player[0].name === cardObj.position.player[1].name) {
+            btn.state('show', btn_split);
+          }
+          if (cardObj.position.dealer[1].name === 'a') {
+            btn.state('show', btn_insure);
+          }
+          break;
 
 
-      else if (phase === 'NewRoundPhase') {
-        console.log('Initialize: NewRoundPhase');
+        // else if (phase === 'DealerPlayPhase') {
+        case 'DealerPlayPhase':
+          console.log('Initialize: DealerPlayPhase');
 
-        // Remove previous cards and scores
-        playerTotal = 0;
-        dealerTotal = 0;
-        cardObj.position.player = [];
-        cardObj.position.dealer = [];
-        element_playerCards.innerHTML = '';
-        element_dealerCards.innerHTML = '';
-        element_playerCardTotal.innerHTML = '';
-        element_dealerCardTotal.innerHTML = '';
+          // Remove buttons
+          btn.state('hide', btn_hit, btn_stand, btn_double, btn_split, btn_insure);
+
+          // Flip first card
+
+          // Recalculate revealed dealer total
+
+          // Dealer bot will add cards until 16 <=
+          cards.botDealer();
+          break;
 
 
-        // check if deck needs to be shuffled
-        if (cardObj.position.deck.length < 180) {
-          board.board_message(`Shuffling..`);
+        // else if (phase === 'ScoringPhase') {
+        case 'ScoringPhase':
+          console.log('Initialize: ScoringPhase');
+          // scores are compaired and winner is chosen
+          playerTotal = cards.check_cardTotal('player');
+
+          console.log(playerTotal);
+          console.log(dealerTotal);
+
+          if (playerTotal === 21 && cardObj.position.player.length === 2 && playerTotal > dealerTotal) {
+            const winValue = board.winOrLose(1.5);
+
+
+
+            board.score_message(`<h1>Blackjack! Win $${winValue}</h1>`);
+
+
+
+            btn.state('show', fs_message)
+            // board.board_message(`Blackjack! Win $${winValue}`);
+          }
+          // Player Lose
+          else if (
+            playerTotal > 21 ||
+            dealerTotal <= 21 && playerTotal <= 21 && playerTotal < dealerTotal
+          ) {
+            // board.board_message('Dealer Wins!');
+            board.winOrLose(-1);
+
+
+
+            board.score_message('<h1>Dealer Wins!</h1>');
+
+
+
+            btn.state('show', fs_message)
+          }
+          // Player Draw
+          else if (playerTotal === dealerTotal) {
+            // board.board_message('Draw!');
+            board.winOrLose(0);
+
+
+
+            board.score_message('<h1>Draw!</h1>');
+
+
+
+            btn.state('show', fs_message)
+          }
+          // Player Win
+          else if (
+            dealerTotal > 21 ||
+            dealerTotal <= 21 && playerTotal <= 21 && playerTotal > dealerTotal
+          ) {
+            const winValue = board.winOrLose(1);
+
+
+
+            board.score_message(`<h1>Win $${winValue}</h1>`);
+
+
+
+            btn.state('show', fs_message)
+            // board.board_message(`Win $${winValue}`);
+          }
+
+          board.boardUpdate_all();
+          // cards.phaseSwitcher('NewRoundPhase');
+          break;
+
+
+        // else if (phase === 'NewRoundPhase') {
+        case 'NewRoundPhase':
+          console.log('Initialize: NewRoundPhase');
+
+          // Remove previous cards and scores
+          playerTotal = 0;
+          dealerTotal = 0;
+          cardObj.position.player = [];
+          cardObj.position.dealer = [];
+          element_playerCards.innerHTML = '';
+          element_dealerCards.innerHTML = '';
+          element_playerCardTotal.innerHTML = '';
+          element_dealerCardTotal.innerHTML = '';
+
+
+          // check if deck needs to be shuffled
+          if (cardObj.position.deck.length < 180) {
+            board.board_message(`Shuffling..`);
+            cards.phaseSwitcher('PlaceYourBetsPhase');
+            return;
+          }
+
+          const [playerScore, playerBetTotal] = board.bet_info();
+          // Remove previous bet if can't cover
+          if (playerBetTotal > playerScore) {
+            board.bet_clear();
+          }
+            // if can't cover, start with nothing
           cards.phaseSwitcher('PlaceYourBetsPhase');
-          return;
-        }
+          break;
 
-        const [playerScore, playerBetTotal] = board.bet_info();
-        console.log(playerScore, playerBetTotal);
-        // Remove previous bet if can't cover
-        if (playerBetTotal > playerScore) {
-          board.bet_clear();
-        }
-          // if can't cover, start with nothing
-        cards.phaseSwitcher('PlaceYourBetsPhase');
 
+
+        // else if (phase === 'ShufflePhase') {
+        case 'ShufflePhase':
+          console.log('Initialize: ShufflePhase');
+          // if not enough cards in deck, shuffle full deck
+          cardObj = {};
+          cards.createDeck();
+          cards.blackJackizer();
+          cards.shuffle();
+          cards.phaseSwitcher('NewRoundPhase');
+          break;
       }
+    },
 
-
-      else if (phase === 'ShufflePhase') {
-        console.log('Initialize: ShufflePhase');
-        // if not enough cards in deck, shuffle full deck
-        cardObj = {};
-        cards.createDeck();
-        cards.blackJackizer();
-        cards.shuffle();
-        cards.phaseSwitcher('NewRoundPhase');
-      }
+    toNewRound: function () {
+      btn.state('hide', fs_message)
+      cards.phaseSwitcher('NewRoundPhase');
     }
   });
 })();

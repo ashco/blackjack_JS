@@ -1,0 +1,1 @@
+fs_message.addEventListener('click', cards.toNewRound);

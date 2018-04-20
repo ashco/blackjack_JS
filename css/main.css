@@ -102,6 +102,23 @@ nav {
   .text__container h1 {
     font-size: 4rem; }
 
+.fullscreen__message {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  background: rgba(61, 60, 60, 0.5); }
+  .fullscreen__message h1 {
+    color: white;
+    font-size: 4.5rem;
+    margin-top: 15vh; }
+
 .card--front {
   background: #F4F4F4; }
 
@@ -135,7 +152,7 @@ nav {
 .chip--500 {
   background: goldenrod; }
 
-.disabled {
+.hidden {
   display: none; }
 
 .button__container button {
@@ -148,6 +165,9 @@ nav {
   text-decoration: none;
   font-size: 1.6rem;
   border-radius: .2rem; }
+
+.button__container button:disabled {
+  background-color: rgba(94, 94, 94, 0.7); }
 
 @media (max-width: 600px) {
   .card {

@@ -15,6 +15,8 @@
       <h2>BlackJack_JS</h2>
     </nav>
 
+    <div class="fullscreen__message hidden"></div>
+
     <div class="text__container">
       <h1></h1>
     </div>
@@ -42,12 +44,12 @@
     </div>
 
     <div class="button__container">
-      <button class="btn--deal disabled" onclick="cards.phaseSwitcher('DealPhase')">Deal</button>
-      <button class="btn--hit disabled" onclick="btn.hit('player')">Hit</button>
-      <button class="btn--stand disabled" onclick="btn.stand()">Stand</button>
-      <button class="btn--double disabled" onclick="btn.double('player')">Double</button>
-      <button class="btn--split disabled">Split</button>
-      <button class="btn--insure disabled">Insure</button>
+      <button class="btn--deal hidden" onclick="cards.phaseSwitcher('DealPhase')">Deal</button>
+      <button class="btn--hit hidden" onclick="btn.hit('player')">Hit</button>
+      <button class="btn--stand hidden" onclick="btn.stand()">Stand</button>
+      <button class="btn--double hidden" onclick="btn.double('player')">Double</button>
+      <button class="btn--split hidden">Split</button>
+      <button class="btn--insure hidden">Insure</button>
     </div>
 
     <div class="score__container">
@@ -61,6 +63,7 @@
   <script src="./src/buttons.js"></script>
   <script src="./src/cards.js"></script>
   <script src="./src/cards_old.js"></script>
+  <script src="./src/listeners.js"></script>
   <script src="./src/initialize.js"></script>
 </body>
 
